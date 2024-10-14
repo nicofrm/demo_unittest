@@ -34,7 +34,7 @@ class Login_page_verification(unittest.TestCase):
 
     def test_create_username_and_password(self):
         pass
-        git
+        
     def test_invalid_user_pass(self):
         pass
 
