@@ -43,6 +43,7 @@ class Login_page_verification(unittest.TestCase):
                 is_error_message_correct = False
         assert sign_in_button.is_displayed() == True, f"Error: The login was done without credentials"
         assert is_error_message_correct == True, f"Error, at least one field is not marked as required"
+
     def test_create_username_and_password(self):
         pass
 
