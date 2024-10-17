@@ -8,7 +8,14 @@ class Login_page_verification(unittest.TestCase):
     LINK = "https://magento.softwaretestingboard.com/"
     SIGN_IN_LINK = (By.LINK_TEXT, "Sign In")
     SIGN_IN_BUTTON = (By.XPATH,'//button[@class="action login primary"]')
+    CREATE_ACCOUNT_LINK = (By.LINK_TEXT, "Create an Account")
     REQUIRED_FIELD_ERROR = (By.XPATH, '//*[@class="input-text mage-error"]//following-sibling::div')
+    FIRST_NAME = (By.ID, "firstname")
+    LAST_NAME = ( By.NAME, "lastname")
+    EMAIL = (By.XPATH, '//input[@autocomplete="email"]')
+    PASSWORD1 = (By.ID, "password")
+    PASSWORD2 = (By.ID, "password-confirmation")
+    CREATE_BUTTON = (By.XPATH,'//button[@class="action submit primary"]')
 
     def setUp(self):
         chrome_options = Options()
@@ -45,10 +52,21 @@ class Login_page_verification(unittest.TestCase):
         assert is_error_message_correct == True, f"Error, at least one field is not marked as required"
 
     def test_create_username_and_password(self):
-        pass
+        self.driver.find_element(*self.CREATE_ACCOUNT_LINK).click()
+        time.sleep(2)
+        self.driver.find_element(*self.FIRST_NAME).send_keys("Nicoleta")
+        self.driver.find_element(*self.LAST_NAME).send_keys("Frumosu")
+        time.sleep(2)
+        self.driver.find_element(*self.EMAIL).send_keys("nicoleta.frumosu12@gmail.com")
+        time.sleep(2)
+        self.driver.find_element(*self.PASSWORD1).send_keys("Nicoleta1")
+        self.driver.find_element(*self.PASSWORD2).send_keys("Nicoleta1")
+        time.sleep(2)
+        self.driver.find_element(*self.CREATE_BUTTON).click()
+        time.sleep(2)
 
     def test_invalid_user_pass(self):
-        pass
+
 
     def test_create_valid_user_pass(self):
         pass
@@ -59,5 +77,6 @@ class Login_page_verification(unittest.TestCase):
     def test_valid_user_invalid_pass(self):
         pass
 
-
+    def test_verify_account_exists(self):
+        pass
 
