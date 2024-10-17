@@ -66,6 +66,7 @@ class Login_page_verification(unittest.TestCase):
         time.sleep(2)
 
     def test_invalid_user_pass(self):
+        pass
 
 
     def test_create_valid_user_pass(self):
