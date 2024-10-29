@@ -12,11 +12,13 @@ class Login_page_verification(unittest.TestCase):
     REQUIRED_FIELD_ERROR = (By.XPATH, '//*[@class="input-text mage-error"]//following-sibling::div')
     FIRST_NAME = (By.ID, "firstname")
     LAST_NAME = ( By.NAME, "lastname")
+    EMAIL_LOGIN = (By.XPATH, '//input[@title="Email"]')
     EMAIL = (By.XPATH, '//input[@autocomplete="email"]')
+    PASSWORD = (By.ID, 'pass')
     PASSWORD1 = (By.ID, "password")
     PASSWORD2 = (By.ID, "password-confirmation")
     CREATE_BUTTON = (By.XPATH,'//button[@class="action submit primary"]')
-
+    LOGIN_MESSAGE = (By.LINK_TEXT, 'The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.')
     def setUp(self):
         chrome_options = Options()
         chrome_options.add_argument("--disable-search-engine-choice-screen")
@@ -66,7 +68,13 @@ class Login_page_verification(unittest.TestCase):
         time.sleep(2)
 
     def test_invalid_user_pass(self):
-        pass
+        self.driver.find_element(*self.SIGN_IN_LINK).click()
+        self.driver.find_element(*self.EMAIL_LOGIN).send_keys("nicoletafrumosu@ymail.com")
+        time.sleep(2)
+        self.driver.find_element(*self.PASSWORD).send_keys("Nicoleta1")
+        expected_text = "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
+        actual_text = self.driver.find_element(*self.LOGIN_MESSAGE).text
+        assert expected_text == actual_text, f"ERROR AT LOGIN"
 
 
     def test_create_valid_user_pass(self):
